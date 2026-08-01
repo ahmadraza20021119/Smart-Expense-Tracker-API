@@ -21,17 +21,33 @@ npm install
 
 ## Run the server
 
+### Locally
 ```bash
 npm start
 ```
 
 The server listens on `http://localhost:3000` by default (override with the `PORT` env var).
 
-## Run the tests
+### With Docker
+Build the Docker image:
+```bash
+docker build -t expense-tracker-api .
+```
+
+Run the container:
+```bash
+docker run -p 3000:3000 expense-tracker-api
+```
+
+By default, data written inside the container (`data/expenses.json`) does not persist
+once the container is removed. To persist it on your host machine, mount a local folder
+as a volume:
 
 ```bash
-npm test
+docker run -p 3000:3000 -v "${PWD}/data:/app/data" expense-tracker-api
 ```
+
+(On Windows PowerShell, `${PWD}` resolves to your current directory; on Command Prompt, use `%cd%` instead.)
 
 Tests run against an isolated test data file (`tests/test-data.json`) and never touch the
 real `data/expenses.json`, so they're safe to run alongside a live server.
@@ -40,6 +56,7 @@ real `data/expenses.json`, so they're safe to run alongside a live server.
 
 | Method | Endpoint                          | Description                                  |
 |--------|------------------------------------|-----------------------------------------------|
+| GET    | `/`                                 | Welcome message + list of available endpoints |
 | GET    | `/health`                          | Health check                                  |
 | POST   | `/api/expenses`                    | Add an expense                                |
 | GET    | `/api/expenses`                    | List all expenses                             |

@@ -2,9 +2,9 @@
 
 ## 1. What was AI-generated vs. written by me
 
-I used Claude to scaffold the basic structure of the project. I then wrote and customized the routes API (in `routes/expenses.js`), the server configuration, and other parts of the application code myself.
+I used Claude to scaffold the basic structure of the project. I then wrote and customized the routes API (in `routes/expenses.js`), the server configuration, the Docker setup (`Dockerfile` and `.dockerignore`), and other parts of the application code myself.
 
-My work also included the validation and testing phase described below — confirming the code actually does what the assignment asked for, and making sure everything runs correctly on my machine.
+My work also included the validation and testing phase described below , wrote the code and then went to check it by making sure the code actually does what the assignment asked for, and making sure everything runs correctly on my machine (both locally and inside the Docker container).
 
 ## 2. What I validated, tested, or changed, and why
 
@@ -31,9 +31,12 @@ My work also included the validation and testing phase described below — confi
 
 ## 3. AI suggestions I did not use, and why
 
-- The assignment explicitly says no database is required, so I kept the
-  file-backed in-memory store the AI proposed rather than adding one.
-- I did not implement any of the optional bonus features (search, monthly
-  summary, Swagger docs, Docker) — the assignment marks these as optional,
-  and I prioritized making sure the required five features were correct and
-  well-tested over adding extra scope.
+- Kept the file-backed store rather than adding a database, since the assignment
+  said no database was required.
+- Implemented Docker as the one bonus feature. I built the image, ran it locally,
+  hit a real port-conflict issue (a leftover `npm start` process and an old
+  container both holding port 3000), diagnosed it with `netstat`/`docker ps`,
+  and confirmed the container serves requests identically to `npm start` before
+  committing the Docker files.
+- Skipped the other bonus options (search, monthly summary, Swagger) since the
+  assignment allows only one and I prioritized getting Docker fully verified.
