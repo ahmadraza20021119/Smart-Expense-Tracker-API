@@ -2,11 +2,7 @@ const express = require('express');
 const { ExpenseStore } = require('./store');
 const { createExpensesRouter } = require('./routes/expenses');
 
-/**
- * Builds an Express app wired to the given store (or a default file-backed
- * one). Kept separate from server.js so tests can create an app instance
- * without binding to a port.
- */
+
 function createApp(store = new ExpenseStore()) {
   const app = express();
   app.use(express.json());

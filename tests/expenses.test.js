@@ -4,8 +4,7 @@ const path = require('path');
 const { createApp } = require('../src/app');
 const { ExpenseStore } = require('../src/store');
 
-// Use a throwaway data file so tests never touch real data, and each test
-// file run starts from a clean slate.
+
 const TEST_DATA_FILE = path.join(__dirname, 'test-data.json');
 
 let app;
